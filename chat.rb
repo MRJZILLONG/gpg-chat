@@ -14,7 +14,6 @@ $ip = gets.chomp
 $myip = %x[ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/']
 
 $client = $myip.split('.')[3] > $ip.split('.')[3] ? false : true
-$cmd = $client ? "nc #{$ip} 5555 -w 120" : "nc -l 5555"
 
 def enc(msg, recipient)
   return  %x[echo '#{msg}' | gpg --encrypt --armor --recipient #{recipient}]
@@ -25,11 +24,11 @@ def dec(msg)
 end
 
 def rec()
-  return dec(%x[#{$cmd}])
+  return dec(%x[nc #{$ip} 5555])
 end
 
 def send(msg)
-  %x[echo '#{enc(msg, $recipient)}' | #{$cmd}]
+  %x[echo '#{enc(msg, $recipient)}' | nc -l 5555]
   return "#{$name}: #{msg}"
 end
 
