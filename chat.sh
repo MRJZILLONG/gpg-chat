@@ -21,11 +21,11 @@ rec() {
 }
 
 send() {
-	(echo $1 | gpg --encrypt --armor --recipient $recipient) | nc $ip 7777
+	(echo $1 | gpg --encrypt --armor --recipient $recipient)>>/dev/null | nc $ip 7777
 }
 
 get_msg() {
-	pre_str=$name$text_prompt
+	pre_str="$name$text_prompt"
 	printf $pre_str
 	read msg
 	echo $pre_str$msg
