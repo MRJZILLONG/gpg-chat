@@ -2,6 +2,7 @@
 Send PGP-encrypted messages over LAN with netcat!
 
 ## Requirements
+- ruby
 - GnuPG
 - openbsd netcat
 - a private key linked to your email address
