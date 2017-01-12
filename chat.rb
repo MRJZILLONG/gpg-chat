@@ -24,12 +24,11 @@ def dec(msg)
 end
 
 def rec()
-  return dec(%x[nc #{$ip} 5555])
+  return dec(%x[nc #{$ip} 7777])
 end
 
 def send(msg)
-  %x[echo '#{enc(msg, $recipient)}' | nc -l 5555]
-  return "#{$name}: #{msg}"
+  %x[echo '#{enc(msg, $recipient)}' | nc -l 7777]
 end
 
 def get_msg()
@@ -43,6 +42,6 @@ if $client then
 end
 
 while true do
-  puts send(get_msg)
+  send(get_msg)
   puts rec
 end
