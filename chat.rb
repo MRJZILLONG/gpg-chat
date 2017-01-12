@@ -11,7 +11,8 @@ $recipient = gets.chomp
 print "RECIPIENT'S IP: "
 $ip = gets.chomp
 
-$myip = %x[ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/']
+print "MY IP: "
+$myip = gets.chomp
 
 $client = $myip.split('.')[3] < $ip.split('.')[3] ? true : false
 
