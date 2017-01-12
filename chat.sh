@@ -12,11 +12,8 @@ printf "Recipient's IP: "
 read ip
 theirlastoctet=$(echo $ip | cut -d '.' -f 4)
 
-printf "Your IP: "
-read myip
-mylastoctet=$(echo $myip | cut -d . -f 4)
-
-client=$([ $mylastoctet > $theirlastoctet ] && echo "true" || echo "false")
+printf "(1) go first or (2) go second: "
+read client
 
 rec() {
 	(nc -l 7777 | gpg --decrypt) | tail -1
@@ -33,7 +30,7 @@ get_msg() {
 	$pre_str$msg
 }
 
-if [ $client = true ]; then
+if [ $client = 2 ]; then
 	echo `rec`
 fi
 
