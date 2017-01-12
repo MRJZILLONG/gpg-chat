@@ -16,7 +16,8 @@ printf "(1) go first or (2) go second: "
 read client
 
 rec() {
-	(nc -l 7777 | gpg --decrypt) | tail -1
+	(nc -l 7777 | gpg --decrypt) > tmp
+	tail -n 1 tmp
 }
 
 send() {
