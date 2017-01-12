@@ -17,18 +17,19 @@ $myip = gets.chomp
 $client = $myip.split('.')[3] < $ip.split('.')[3] ? true : false
 
 def rec()
-	a = %x[(nc -l 7777 | gpg --decrypt)]
-	%x[echo "#{a}" | tail -n 1]
+	received_message = %x[(nc -l 7777 | gpg --decrypt)]
+	return received_message.lines.last
 end
 
 def send(msg)
-	%x[(echo "#{msg}" | gpg --encrypt --armor --recipient #{$recipient}) | nc #{$ip} 7777]
+	encrypted_message = %x[echo '#{msg}' | gpg --encrypt --armor --recipient #{$recipient}] 
+	system("echo '#{encrypted_message}' | nc #{$ip} 7777"
 end
 
 def get_msg()
 	pre_str = "#{$name}#{$text_prompt}"
 	print pre_str
-	pre_str + gets.chomp
+	return pre_str + gets.chomp
 end
 
 if $client then
