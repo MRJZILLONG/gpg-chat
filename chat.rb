@@ -28,7 +28,7 @@ def rec()
 end
 
 def send(msg)
-  %x[echo '#{enc(msg)}' | nc #{ip} 7777]
+  %x[echo '#{enc(msg)}' | nc #{$ip} 7777]
 end
 
 def get_msg()
