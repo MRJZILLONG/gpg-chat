@@ -13,7 +13,7 @@ $ip = gets.chomp
 
 print "(1) go first or (2) go second: "
 yes = gets.chomp
-$gofirst = yes.to_i == 1 ? true : false
+$gofirst = yes.to_i == 1 ? false : true
 
 def rec()
 	received_message = %x[nc -l 7777 | gpg --decrypt 2>&1]
