@@ -33,7 +33,7 @@ get_msg() {
 	$pre_str$msg
 }
 
-if [ $client ]; then
+if [ $client = true ]; then
 	echo `rec`
 fi
 
