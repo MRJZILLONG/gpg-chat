@@ -11,13 +11,12 @@ $recipient = gets.chomp
 print "RECIPIENT'S IP: "
 $ip = gets.chomp
 
-print "MY IP: "
-$myip = gets.chomp
-
-$client = $myip.split('.')[3] < $ip.split('.')[3] ? true : false
+print "(1) go first or (2) go second: "
+yes = gets.chomp
+$gofirst = yes.to_i == 1 ? true : false
 
 def rec()
-	received_message = %x[(nc -l 7777 | gpg --decrypt)]
+	received_message = %x[nc -l 7777 | gpg --decrypt 2>&1]
 	return received_message.lines.last
 end
 
@@ -32,7 +31,7 @@ def get_msg()
 	return pre_str + gets.chomp
 end
 
-if $client then
+if $gofirst then
 	puts rec
 end
 
