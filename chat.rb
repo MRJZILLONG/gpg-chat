@@ -15,20 +15,12 @@ $myip = %x[ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1
 
 $client = $myip.split('.')[3] < $ip.split('.')[3] ? true : false
 
-def enc(msg)
-  return  %x[echo '#{msg}' | gpg --encrypt --armor --recipient #{$recipient}]
-end
-
-def dec(msg)
-  return %x[echo '#{msg}' | gpg --decrypt --armor]
-end
-
 def rec()
-  return dec(%x[nc -l 7777])
+  return %x[nc -l 7777 | gpg --decrypt]
 end
 
 def send(msg)
-  %x[echo '#{enc(msg)}' | nc #{$ip} 7777]
+  %x[(echo '#{enc(msg)}' | gpg --encrypt --armor --recipient #{$recipient}) | nc #{$ip} 7777]
 end
 
 def get_msg()
