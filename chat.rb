@@ -18,11 +18,11 @@ $client = $myip.split('.')[3] < $ip.split('.')[3] ? true : false
 
 def rec()
 	a = %x[(nc -l 7777 | gpg --decrypt)]
-	%x[echo #{a} | tail -n 1]
+	%x[echo "#{a}" | tail -n 1]
 end
 
 def send(msg)
-	%x[(echo '#{msg}' | gpg --encrypt --armor --recipient #{$recipient}) | nc #{$ip} 7777]
+	%x[(echo "#{msg}" | gpg --encrypt --armor --recipient #{$recipient}) | nc #{$ip} 7777]
 end
 
 def get_msg()
