@@ -16,7 +16,7 @@ $myip = %x[ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1
 $client = $myip.split('.')[3] < $ip.split('.')[3] ? true : false
 
 def rec()
-  %x[nc -l 7777 | gpg --decrypt | tail -1]
+  %x[(nc -l 7777 | gpg --decrypt) | tail -1]
 end
 
 def send(msg)
