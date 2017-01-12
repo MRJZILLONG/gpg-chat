@@ -12,7 +12,8 @@ printf "Recipient's IP: "
 read ip
 theirlastoctet=$(echo $ip | cut -d '.' -f 4)
 
-myip=`(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')`
+printf "Your IP: "
+read myip
 mylastoctet=$(echo $myip | cut -d . -f 4)
 
 client=$([ $mylastoctet > $theirlastoctet ] && echo "true" || echo "false")
