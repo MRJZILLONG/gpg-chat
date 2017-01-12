@@ -23,7 +23,7 @@ end
 
 def send(msg)
 	encrypted_message = %x[echo '#{msg}' | gpg --encrypt --armor --recipient #{$recipient}] 
-	system("echo '#{encrypted_message}' | nc #{$ip} 7777"
+	system("echo '#{encrypted_message}' | nc #{$ip} 7777")
 end
 
 def get_msg()
