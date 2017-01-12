@@ -28,7 +28,7 @@ get_msg() {
 	pre_str=$name$text_prompt
 	printf $pre_str
 	read msg
-	$pre_str$msg
+	echo $pre_str$msg
 }
 
 if [ $client = 2 ]; then
