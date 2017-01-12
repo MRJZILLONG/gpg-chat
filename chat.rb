@@ -17,7 +17,7 @@ $gofirst = yes.to_i == 1 ? true : false
 
 def rec()
 	received_message = %x[nc -l 7777 | gpg --decrypt 2>&1]
-	return received_message.lines.last
+	return received_message.lines.last.chomp
 end
 
 def send(msg)
