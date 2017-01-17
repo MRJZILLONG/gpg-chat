@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-require "shellwords"
-
 $text_prompt = " >> "
 
 print "YOUR NAME: "
@@ -23,7 +21,7 @@ def rec()
 end
 
 def send(msg)
-	encrypted_message = Shellwords.escape(%x[echo '#{msg}' | gpg --encrypt --armor --recipient #{$recipient}])
+	encrypted_message = %x[echo '#{msg}' | gpg --encrypt --armor --recipient #{$recipient}]
 	%x[echo '#{encrypted_message}' | nc #{$ip} 7777]
 end
 
