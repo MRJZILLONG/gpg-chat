@@ -13,13 +13,13 @@ yes = gets.chomp
 $gofirst = yes.to_i == 1 ? false : true
 
 def rec()
-	received_message = %x[nc -l 7319]
+	received_message = %x[nc -vvl 7319]
 	return received_message.lines.last.chomp
 end
 
 def send(msg)
 	encrypted_message = %x[echo '#{msg}']
-	%x[echo '#{encrypted_message}' | nc #{$ip} 7319]
+	%x[echo '#{msg}' | nc -q 1 #{$ip} 7319]
 end
 
 def get_msg()
