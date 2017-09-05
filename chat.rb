@@ -1,18 +1,23 @@
 #!/usr/bin/env ruby
 
+input_array = ARGV
+
+if input_array.length < 2
+	puts "Usage: gpgcat [nickname] [recipient email] eg: gpgcat bob alice@acme.com"
+	exit
+end
+
 $text_prompt = " >> "
 
-print "Nickname: "
-$name = gets.chomp
-
-print "Recipient's Email: "
-$recipient = gets.chomp
+$name = input_array[0].to_s
+$recipient = input_array[1].to_s
 
 print "Recipient's IP: "
-$ip = gets.chomp
+$ip = $stdin.gets.chomp
 
 print "(1) go first or (2) go second: "
-yes = gets.chomp
+yes = $stdin.gets.chomp
+
 $gofirst = yes.to_i == 1 ? false : true
 
 def rec()
