@@ -33,7 +33,7 @@ end
 def get_msg()
 	pre_str = "#{$name}#{$text_prompt}"
 	print pre_str
-	return pre_str + gets.chomp
+	return pre_str + $stdin.gets.chomp
 end
 
 if $gofirst then
